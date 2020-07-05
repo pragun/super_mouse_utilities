@@ -77,7 +77,7 @@ int test_hid(int argc, char* argv[])
 	if (hid_init())
 		return -1;
 
-	devs = hid_enumerate(0x0, 0x0);
+	devs = hid_enumerate(0x0483, 0x572b);
 	cur_dev = devs;
 	while (cur_dev) {
 		printf("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls", cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
@@ -101,7 +101,7 @@ int test_hid(int argc, char* argv[])
 	// Open the device using the VID, PID,
 	// and optionally the Serial number.
 	////handle = hid_open(0x4d8, 0x3f, L"12345");
-	handle = hid_open(0x4d8, 0x3f, NULL);
+	handle = hid_open_w_usage_page(0x0483, 0x572b, 0x00, 0xFF00);
 	if (!handle) {
 		printf("unable to open device\n");
 		return 1;
@@ -136,26 +136,30 @@ int test_hid(int argc, char* argv[])
 		printf("Unable to read indexed string 1\n");
 	printf("Indexed String 1: %ls\n", wstr);
 
+	/*
 	// Set the hid_read() function to be non-blocking.
 	hid_set_nonblocking(handle, 1);
 
 	// Try to read from the device. There should be no
 	// data here, but execution should not block.
 	res = hid_read(handle, buf, 17);
+	*/
 
 	// Send a Feature Report to the device
-	buf[0] = 0x2;
+	buf[0] = 0x05;
 	buf[1] = 0xa0;
 	buf[2] = 0x0a;
 	buf[3] = 0x00;
 	buf[4] = 0x00;
-	res = hid_send_feature_report(handle, buf, 17);
+	res = hid_write(handle, buf, 17);
 	if (res < 0) {
 		printf("Unable to send a feature report.\n");
+		printf("%ls", hid_error(handle));
 	}
 
 	memset(buf, 0, sizeof(buf));
 
+	/*
 	// Read a Feature Report from the device
 	buf[0] = 0x2;
 	res = hid_get_feature_report(handle, buf, sizeof(buf));
@@ -212,6 +216,7 @@ int test_hid(int argc, char* argv[])
 	for (i = 0; i < res; i++)
 		printf("%02hhx ", buf[i]);
 	printf("\n");
+	*/
 
 	hid_close(handle);
 
