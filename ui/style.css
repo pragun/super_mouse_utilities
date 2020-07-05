@@ -1,0 +1,28 @@
+html {
+    background: white;
+}
+
+body {
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+.titled-block{
+    text-align:left;
+    width:90%;
+    margin:0 auto;
+}
+
+#log-box {
+    width:100%;
+    height:200px;
+    margin:0 auto;
+    background-color:#e8e8e8;
+    overflow: scroll;
+}
+
+#log-box p{
+    margin: 0px;
+    padding: 1px;
+}

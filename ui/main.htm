@@ -1,28 +1,37 @@
 <html>
+    <style src="style.css" />
     <head>
-        <title>Hello</title>
-        <style>
-
-          html {
-            background:white;
-          }  
-
-          body {
-            vertical-align:middle;
-            text-align:center;
-          }
-
-        </style>
+        <title>USBHID Re-layer Config Utility</title>
         <script type="text/tiscript">
+                function self.ready() {
+                // calling native method defined in main.cpp
+                //$(body).text += view.frame.nativeMessage();
+                }
 
-          function self.ready() {
-            // calling native method defined in main.cpp
-            $(body).text = view.frame.nativeMessage(); 
-          }
+            event click $(button#list_hid_devices) {
+                view.frame.list_hid_devices();
+            }
 
+            event click $(button#test_config_read_write) {
+                view.frame.test_config_read_write();
+            }
+
+            function new_log_entry(text){
+                $(div#log-box).append(<p>{text}</p>);
+            }
         </script>
     </head>
     <body>
 
+    <div class="titled-block">
+        <button id="test_config_read_write">Test Config Read/Write</button>
+        <button id="list_hid_devices">List HID Devices</button>
+    </div>
+    <div class="titled-block">
+        <b>Log:</b>
+        <div id="log-box">
+        </div>
+    </div>
+    
     </body>
 </html>

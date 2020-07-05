@@ -113,6 +113,7 @@
     <None Include="ui\main.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="ui\style.css" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\hidapi\windows\hidapi.vcxproj">
