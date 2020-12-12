@@ -16,6 +16,10 @@
                 view.frame.test_config_read_write();
             }
 
+            event click $(button#write_user_config) {
+                view.frame.write_user_config();
+            }
+
             function new_log_entry(text){
                 $(div#log-box).append(<p>{text}</p>);
             }
@@ -23,10 +27,11 @@
     </head>
     <body>
 
-    <div class="titled-block">
-        <button id="test_config_read_write">Test Config Read/Write</button>
-        <button id="list_hid_devices">List HID Devices</button>
-    </div>
+        <div class="titled-block">
+            <button id="test_config_read_write">Test Config Read/Write</button>
+            <button id="list_hid_devices">List HID Devices</button>
+            <button id="write_user_config">Write User Configuration</button>
+        </div>
     <div class="titled-block">
         <b>Log:</b>
         <div id="log-box">

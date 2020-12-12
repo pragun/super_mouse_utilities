@@ -2,6 +2,8 @@
 #include "sciter-x-window.hpp"
 #include "hidapi.h"
 #include <stdio.h>
+#include "resources.cpp" // resources packaged into binary blob.
+#include "user_config.h"
 
 #define printf debug_printf
 #define STM32_PID 0x572b
@@ -30,7 +32,8 @@ public:
 		SOM_FUNCS(
 			SOM_FUNC(nativeMessage),
 			SOM_FUNC(list_hid_devices),
-			SOM_FUNC(test_config_read_write)
+			SOM_FUNC(test_config_read_write),
+			SOM_FUNC(write_user_config),
 		)
 		SOM_PASSPORT_END
 
@@ -149,9 +152,35 @@ public:
 		memset(buf, 0, sizeof(buf));
 		return 0;
 	}
+
+	int write_user_config() {
+		std::transform(array_of_config_key_values.begin(), array_of_config_key_values.end(), config_ksv_objs.begin(), convert_cfg_entry_to_key_size_value);
+		for (auto s : config_ksv_objs) {
+			write_ksv_obj(s);
+		}
+		return 0;
+	}
+
+	int write_ksv_obj(Key_Size_Value_For_Flash& obj) {
+		hid_device* handle;
+
+		handle = hid_open_w_usage_page(STM32_VID, STM32_PID, 0x00, 0xFF00);
+		if (!handle) {
+			log_printf("unable to open device\n");
+			return 1;
+		}
+		log_printf("Opened device successfully...\n");
+
+		unsigned char buf[64];
+		memset(buf, 0x00, sizeof(buf));
+		buf[0] = 0x05; //report id for HID output Reports
+		buf[1] = 0x01; //cmd id for KSV_write
+		memcpy(&buf[2], &obj, obj.size + 5);
+		int res = hid_write(handle, buf, obj.size + 7);
+
+		}
 };
 
-#include "resources.cpp" // resources packaged into binary blob.
 
 int uimain(std::function<int()> run ) {
 

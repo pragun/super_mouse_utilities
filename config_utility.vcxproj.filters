@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SCITERSDK)\include\sciter-win-main.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pack-resources.bat" />
+    <None Include="ui\style.css">
+      <Filter>ui</Filter>
+    </None>
+    <None Include="ui\main.htm">
+      <Filter>ui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ui">
+      <UniqueIdentifier>{d5501e32-53af-41d4-9389-34c37b97ebe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fw_includes">
+      <UniqueIdentifier>{bbe29bdc-97f0-4948-aea9-4e6006487b51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\super_mouse_stm32f4_usb_device\Core\Inc\reporting_functions.h">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
+    <ClInclude Include="user_config.h">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
