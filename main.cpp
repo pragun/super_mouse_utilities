@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "resources.cpp" // resources packaged into binary blob.
 #include "user_config.h"
+#include "rpc_impl.hpp"
 
 #define printf debug_printf
 #define STM32_PID 0x572b
@@ -34,6 +35,8 @@ public:
 			SOM_FUNC(list_hid_devices),
 			SOM_FUNC(test_config_read_write),
 			SOM_FUNC(write_user_config),
+			SOM_FUNC(erase_flash),
+			SOM_FUNC(reset_system),
 		)
 		SOM_PASSPORT_END
 
@@ -174,11 +177,48 @@ public:
 		unsigned char buf[64];
 		memset(buf, 0x00, sizeof(buf));
 		buf[0] = 0x05; //report id for HID output Reports
-		buf[1] = 0x01; //cmd id for KSV_write
+		buf[1] = (unsigned char) RPC_Function_Enum::WRITE_KEY_SIZE_VALUE_TO_FLASH; //cmd id for KSV_write
 		memcpy(&buf[2], &obj, obj.size + 5);
 		int res = hid_write(handle, buf, obj.size + 7);
-
+		return res;
 		}
+
+	int erase_flash() {
+		hid_device* handle;
+
+		handle = hid_open_w_usage_page(STM32_VID, STM32_PID, 0x00, 0xFF00);
+		if (!handle) {
+			log_printf("unable to open device\n");
+			return 1;
+		}
+		log_printf("Opened device successfully...\n");
+
+		unsigned char buf[64];
+		memset(buf, 0x00, sizeof(buf));
+		buf[0] = 0x05; //report id for HID output Reports
+		buf[1] = (unsigned char)RPC_Function_Enum::ERASE_FLASH_SECTOR; //cmd id for KSV_write
+		int res = hid_write(handle, buf, 5);
+		return res;
+	}
+
+	int reset_system() {
+		hid_device* handle;
+
+		handle = hid_open_w_usage_page(STM32_VID, STM32_PID, 0x00, 0xFF00);
+		if (!handle) {
+			log_printf("unable to open device\n");
+			return 1;
+		}
+		log_printf("Opened device successfully...\n");
+
+		unsigned char buf[64];
+		memset(buf, 0x00, sizeof(buf));
+		buf[0] = 0x05; //report id for HID output Reports
+		buf[1] = (unsigned char)RPC_Function_Enum::RESET_SYSTEM; //cmd id for KSV_write
+		int res = hid_write(handle, buf, 5);
+		return res;
+	}
+
 };
 
 

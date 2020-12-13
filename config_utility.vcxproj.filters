@@ -31,5 +31,11 @@
     <ClInclude Include="user_config.h">
       <Filter>fw_includes</Filter>
     </ClInclude>
+    <ClInclude Include="..\super_mouse_stm32f4_usb_device\rpc\rpc_impl.hpp">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\super_mouse_stm32f4_usb_device\utils\sequential_enum.h">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

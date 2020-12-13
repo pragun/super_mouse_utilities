@@ -20,6 +20,14 @@
                 view.frame.write_user_config();
             }
 
+            event click $(button#erase_flash) {
+                view.frame.erase_flash();
+            }
+
+            event click $(button#reset_system) {
+                view.frame.reset_system();
+            }
+
             function new_log_entry(text){
                 $(div#log-box).append(<p>{text}</p>);
             }
@@ -31,6 +39,8 @@
             <button id="test_config_read_write">Test Config Read/Write</button>
             <button id="list_hid_devices">List HID Devices</button>
             <button id="write_user_config">Write User Configuration</button>
+            <button id="erase_flash">Erase Flash</button>
+            <button id="reset_system">Reset Board</button>
         </div>
     <div class="titled-block">
         <b>Log:</b>

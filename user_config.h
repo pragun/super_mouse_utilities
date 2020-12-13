@@ -20,7 +20,7 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 			.keypad_key = 1,
 			.key_down = CFG(KEYBOARD_PRESS_RELEASE,
 				{.modifier_keys = 0x00,
-				 .keys = {65,0,0}
+				 .keys = {0x04,0,0}
 				}),
 			.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,
 				{.x_factor = 2,
@@ -28,7 +28,7 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 				.z_factor = 2, }),
 			.short_release = CFG(KEYBOARD_PRESS_RELEASE,
 				{.modifier_keys = 0x02,
-				 .keys = {65,0,0}
+				 .keys = {0x04,0,0}
 				}),
 			.long_release = CFG(NO_REPORT,{}),
 	});
