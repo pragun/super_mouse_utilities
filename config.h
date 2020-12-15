@@ -57,9 +57,6 @@ struct Key_Size_Value_For_Flash {
 	uint8_t value[CFG_ENTRY_SERIALIZATION_SIZE_LIMIT];
 };
 
-#define CFG(X, ...) C(Reporting_Func_Params_Typedef<ReportingFunctionEnum::X>__VA_ARGS__)
-
-
 Key_Size_Value_For_Flash convert_cfg_entry_to_key_size_value(User_Config_TypeDef cfg) {
 	Key_Size_Value_For_Flash ksvf_obj;
 	ksvf_obj.key = (cfg.application_id << 8) | (cfg.keypad_key);

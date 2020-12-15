@@ -128,6 +128,7 @@
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\rpc\rpc_impl.hpp" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\utils\sequential_enum.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="usb_hid_keys.h" />
     <ClInclude Include="user_config.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
