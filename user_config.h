@@ -12,7 +12,32 @@
 
 auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 	User_Config_TypeDef{
-	.application_id = 0, .keypad_key = 3,
+		.application_id = 0, .keypad_key = 0,
+		.key_down = CFG(NO_REPORT,{}),
+		.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 1, .y_factor = 1, .z_factor = 1, }),
+		.short_release = CFG(NO_REPORT,{}),
+		.long_release = CFG(NO_REPORT,{}),
+	}
+
+	,User_Config_TypeDef{
+   .application_id = 0, .keypad_key = 1,
+   .key_down = CFG(MODIFIER_HOLD_PRESS_RELEASE,{.modifier_hold_state = KEY_MOD_RALT, .press_release = {.modifier_keys = 0x00, .keys = {KEY_TAB,0,0}}}),
+   .mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = BIG_MOD_DIVISOR, .y_divisor = BIG_MOD_DIVISOR, .z_divisor = 1,
+		   .x_movement_keys = {
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_LEFT,0,0} }),
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_RIGHT,0,0} })},
+		   .y_movement_keys = {
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_UP,0,0} }),
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_DOWN,0,0} })},
+		   .z_movement_keys = {
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ENTER,0,0} }),
+		   KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ESC,0,0} })}, }),
+   .short_release = CFG(NO_REPORT,{}),
+   .long_release = CFG(NO_REPORT,{}),
+	}
+
+	,User_Config_TypeDef{
+	.application_id = 0, .keypad_key = 2,
 	.key_down = CFG(NO_REPORT,{}),
 	.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = BIG_MOD_DIVISOR, .y_divisor = BIG_MOD_DIVISOR, .z_divisor = 1,
 			.x_movement_keys = {
@@ -29,54 +54,11 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 	}
 
 	,User_Config_TypeDef{
-	.application_id = 0, .keypad_key = 6,
-	.key_down = CFG(NO_REPORT,{}),
-	.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = BIG_MOD_DIVISOR, .y_divisor = BIG_MOD_DIVISOR, .z_divisor = 1,
-			.x_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RCTRL, .keys = {KEY_LEFT,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RCTRL, .keys = {KEY_RIGHT,0,0} })},
-			.y_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RCTRL, .keys = {KEY_UP,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RCTRL, .keys = {KEY_DOWN,0,0} })},
-			.z_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RALT, .keys = {KEY_UP,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = KEY_MOD_RALT, .keys = {KEY_DOWN,0,0} })}, }),
-	.short_release = CFG(NO_REPORT,{}),
-	.long_release = CFG(NO_REPORT,{}),
-	}
-
-	,User_Config_TypeDef{
-		.application_id = 0, .keypad_key = 2,
-		.key_down = CFG(NO_REPORT,{}),
-		.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = SMALL_MOD_DIVISOR, .y_divisor = SMALL_MOD_DIVISOR, .z_divisor = 1,
-			.x_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_LEFT,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_RIGHT,0,0} })},
-			.y_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_UP,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_DOWN,0,0} })},
-			.z_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ENTER,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ESC,0,0} })}, }),
+   .application_id = 0, .keypad_key = 3,
+   .key_down = CFG(MODIFIER_HOLD_PRESS_RELEASE,{.modifier_hold_state = KEY_MOD_RCTRL, .press_release = {.modifier_keys = 0x00, .keys = {0,0,0}}}),
+   .mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 2, .y_factor = 2, .z_factor = 2, }),
 		.short_release = CFG(NO_REPORT,{}),
 		.long_release = CFG(NO_REPORT,{}),
-	}
-
-	, User_Config_TypeDef{
-	.application_id = 0, .keypad_key = 5,
-	.key_down = CFG(MODIFIER_HOLD_PRESS_RELEASE,{.modifier_hold_state = KEY_MOD_RALT, .press_release = {.modifier_keys = 0x00, .keys = {KEY_TAB,0,0}}}),
-	.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = BIG_MOD_DIVISOR, .y_divisor = BIG_MOD_DIVISOR, .z_divisor = 1,
-			.x_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_LEFT,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_RIGHT,0,0} })},
-			.y_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_UP,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_DOWN,0,0} })},
-			.z_movement_keys = {
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ENTER,0,0} }),
-			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ESC,0,0} })}, }),
-	.short_release = CFG(NO_REPORT,{}),
-	.long_release = CFG(NO_REPORT,{}),
 	}
 
 	, User_Config_TypeDef{
@@ -97,7 +79,15 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 	}
 
 	, User_Config_TypeDef{
-	.application_id = 0, .keypad_key = 7,
+		.application_id = 0, .keypad_key = 5,
+		.key_down = CFG(NO_REPORT,{}),
+		.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 2, .y_factor = 2, .z_factor = 2, }),
+		.short_release = CFG(NO_REPORT,{}),
+		.long_release = CFG(NO_REPORT,{}),
+	}
+
+	, User_Config_TypeDef{
+	.application_id = 0, .keypad_key = 6,
 	.key_down = CFG(NO_REPORT,{}),
 	.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = BIG_MOD_DIVISOR, .y_divisor = BIG_MOD_DIVISOR, .z_divisor = 1,
 			.x_movement_keys = {
@@ -114,9 +104,9 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 	}
 
 	, User_Config_TypeDef{
-		.application_id = 0, .keypad_key = 1,
+		.application_id = 0, .keypad_key = 7,
 		.key_down = CFG(NO_REPORT,{}),
-		.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 2, .y_factor = 2, .z_factor = 2, }),
+		.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 1, .y_factor = 1, .z_factor = 1, }),
 		.short_release = CFG(NO_REPORT,{}),
 		.long_release = CFG(NO_REPORT,{}),
 	}
@@ -157,6 +147,31 @@ auto array_of_config_key_values = array_of<User_Config_TypeDef>(
 		.application_id = 0, .keypad_key = 12,
 		.key_down = CFG(NO_REPORT,{}),
 		.mouse_movement = CFG(ALTERED_MOUSE_MOVEMENT,{.x_factor = 1, .y_factor = 1, .z_factor = 1, }),
+		.short_release = CFG(NO_REPORT,{}),
+		.long_release = CFG(NO_REPORT,{}),
+	}
+
+	,User_Config_TypeDef{
+		.application_id = 0, .keypad_key = RING_BUTTON_KEYPAD_IDX,
+		.key_down = CFG(NO_REPORT,{}),
+		.mouse_movement = CFG(MOTION_MOD_KEY_PRESS_RELEASE, {.x_divisor = SMALL_MOD_DIVISOR, .y_divisor = SMALL_MOD_DIVISOR, .z_divisor = 1,
+			.x_movement_keys = {
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_LEFT,0,0} }),
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_RIGHT,0,0} })},
+			.y_movement_keys = {
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_UP,0,0} }),
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_DOWN,0,0} })},
+			.z_movement_keys = {
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ENTER,0,0} }),
+			KBRD_PRS_RLS({.modifier_keys = 0x00, .keys = {KEY_ESC,0,0} })}, }),
+		.short_release = CFG(NO_REPORT,{}),
+		.long_release = CFG(NO_REPORT,{}),
+	}
+
+	,User_Config_TypeDef{
+		.application_id = 0, .keypad_key = SCROLL_BUTTON_KEYPAD_IDX,
+		.key_down = CFG(NO_REPORT,{}),
+		.mouse_movement = CFG(MOTION_AS_SCROLL, {.x_divisor = 4, .y_divisor = 4}),
 		.short_release = CFG(NO_REPORT,{}),
 		.long_release = CFG(NO_REPORT,{}),
 	}
