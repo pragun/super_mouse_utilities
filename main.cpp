@@ -5,10 +5,14 @@
 #include "resources.cpp" // resources packaged into binary blob.
 #include "user_config.h"
 #include "rpc_impl.hpp"
+#include <psapi.h>
 
 #define printf debug_printf
 #define STM32_PID 0x572b
 #define STM32_VID 0x0483
+
+#define IDT_TIMER1 1
+#define IDT_TIMER2 2
 
 int __cdecl debug_printf(const char* format, ...)
 {
@@ -26,7 +30,8 @@ int __cdecl debug_printf(const char* format, ...)
 
 class frame : public sciter::window {
 public:
-	frame() : window(SW_TITLEBAR | SW_RESIZEABLE | SW_CONTROLS | SW_MAIN | SW_ENABLE_DEBUG) {}
+	frame() : window(SW_TITLEBAR | SW_RESIZEABLE | SW_CONTROLS | SW_MAIN | SW_ENABLE_DEBUG) {
+	}
 
 	// passport - lists native functions and properties exposed to script:
 	SOM_PASSPORT_BEGIN(frame)
@@ -53,6 +58,27 @@ public:
 		return ret;
 	}
 
+	void timer_called()
+	{
+		TCHAR buffer[MAX_PATH] = { 0 };
+		DWORD dwProcId = 0;
+
+		log_printf("Timer Called..."); 
+		HWND foreground_window = GetForegroundWindow();
+		if (foreground_window != NULL) {
+			GetWindowThreadProcessId(foreground_window, &dwProcId);
+			HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, dwProcId);
+			//GetModuleFileName((HMODULE)hProc, buffer, MAX_PATH);
+			DWORD dbytes = GetModuleFileNameExA((HMODULE)hProc, NULL, buffer, MAX_PATH);
+			CloseHandle(hProc);
+			log_printf("Foreground Window is %s", buffer);
+		}
+		else {
+			log_printf("Foreground Window HWND is NULL");
+		}
+	}
+
+	
 	int list_hid_devices()
 	{
 		int i;
@@ -221,6 +247,18 @@ public:
 
 };
 
+HWINDOW* hwnd_ptr;
+
+sciter::om::hasset<frame> frame_ptr;
+
+void CALLBACK Timerproc(
+	HWND Arg1,
+	UINT Arg2,
+	UINT_PTR Arg3,
+	DWORD Arg4
+) {
+	frame_ptr->timer_called();
+}
 
 int uimain(std::function<int()> run ) {
 
@@ -232,7 +270,15 @@ int uimain(std::function<int()> run ) {
   pwin->load( WSTR("this://app/main.htm") );
   
   //test_hid();
-  
+  HWINDOW hwnd = pwin->get_hwnd();
+  hwnd_ptr = &hwnd;
+  frame_ptr = pwin;
+
+  SetTimer(hwnd,             // handle to main window 
+			IDT_TIMER1,            // timer identifier 
+			1000,                 // 10-second interval 
+			(TIMERPROC) &Timerproc);     // no timer callback 
+
   pwin->expand();
 
   return run();
