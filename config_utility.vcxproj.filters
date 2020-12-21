@@ -22,9 +22,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\super_mouse_stm32f4_usb_device\Core\Inc\reporting_functions.h">
-      <Filter>fw_includes</Filter>
-    </ClInclude>
     <ClInclude Include="config.h">
       <Filter>fw_includes</Filter>
     </ClInclude>
@@ -38,5 +35,8 @@
       <Filter>fw_includes</Filter>
     </ClInclude>
     <ClInclude Include="usb_hid_keys.h" />
+    <ClInclude Include="..\super_mouse_stm32f4_usb_device\mouse\reporting_functions.h">
+      <Filter>fw_includes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

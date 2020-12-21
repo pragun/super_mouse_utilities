@@ -58,7 +58,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;F:\super_mouse_cape\hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;F:\super_mouse_cape\hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\super_mouse_stm32f4_usb_device\Core\Inc\reporting_functions.h" />
+    <ClInclude Include="..\super_mouse_stm32f4_usb_device\mouse\reporting_functions.h" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\rpc\rpc_impl.hpp" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\utils\sequential_enum.h" />
     <ClInclude Include="config.h" />
