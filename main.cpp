@@ -6,6 +6,7 @@
 #include "user_config.h"
 #include "rpc_impl.hpp"
 #include <psapi.h>
+#include <Python.h>
 
 #define printf debug_printf
 #define STM32_PID 0x572b
@@ -261,6 +262,15 @@ void CALLBACK Timerproc(
 }
 
 int uimain(std::function<int()> run ) {
+
+	Py_Initialize();
+	auto a = Py_GetPath();
+	PyRun_SimpleString("print('Today is', ctime(time()))\n");
+	if (Py_FinalizeEx() < 0) {
+		exit(120);
+	}
+	//PyMem_RawFree();
+	
 
   sciter::archive::instance().open(aux::elements_of(resources)); // bind resources[] (defined in "resources.cpp") with the archive
 
