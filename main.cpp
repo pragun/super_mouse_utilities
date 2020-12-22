@@ -6,7 +6,16 @@
 #include "user_config.h"
 #include "rpc_impl.hpp"
 #include <psapi.h>
-#include <Python.h>
+#include <pybind11/embed.h>
+
+namespace py = pybind11;
+
+PYBIND11_EMBEDDED_MODULE(fast_calc, m) {
+	// `m` is a `py::module_` which is used to bind functions and classes
+	m.def("add", [](int i, int j) {
+		return i + j;
+		});
+}
 
 #define printf debug_printf
 #define STM32_PID 0x572b
@@ -263,12 +272,19 @@ void CALLBACK Timerproc(
 
 int uimain(std::function<int()> run ) {
 
-	Py_Initialize();
+	py::scoped_interpreter guard{};
+
+	auto fast_calc = py::module_::import("fast_calc");
+	auto result = fast_calc.attr("add")(1, 2).cast<int>();
+	assert(result == 3);
+
+	/*Py_Initialize();
 	auto a = Py_GetPath();
 	PyRun_SimpleString("print('Today is', ctime(time()))\n");
 	if (Py_FinalizeEx() < 0) {
 		exit(120);
 	}
+	*/
 	//PyMem_RawFree();
 	
 
