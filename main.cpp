@@ -7,6 +7,12 @@
 #include "rpc_impl.hpp"
 #include <psapi.h>
 
+#include "lua.hpp"
+
+#include <sol/sol.hpp>
+#define SOL_ALL_SAFETIES_ON 1
+#include <cassert>
+
 #define printf debug_printf
 #define STM32_PID 0x572b
 #define STM32_VID 0x0483
@@ -261,6 +267,11 @@ void CALLBACK Timerproc(
 }
 
 int uimain(std::function<int()> run ) {
+	sol::state lua;
+	int x = 0;
+	lua.set_function("beep", [&x] { ++x; });
+	lua.script("beep()");
+	assert(x == 1);
 
   sciter::archive::instance().open(aux::elements_of(resources)); // bind resources[] (defined in "resources.cpp") with the archive
 

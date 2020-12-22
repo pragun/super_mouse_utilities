@@ -46,6 +46,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)Debug</OutDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\super_mouse_cape\sol2\include;.;F:\super_mouse_cape\hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils;F:\super_mouse_cape\super_mouse_utilities\lua-5.4.2\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -58,7 +60,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;F:\super_mouse_cape\hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -107,6 +110,39 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="$(SCITERSDK)\include\sciter-win-main.cpp" />
+    <ClCompile Include="lua-5.4.2\src\lapi.c" />
+    <ClCompile Include="lua-5.4.2\src\lauxlib.c" />
+    <ClCompile Include="lua-5.4.2\src\lbaselib.c" />
+    <ClCompile Include="lua-5.4.2\src\lcode.c" />
+    <ClCompile Include="lua-5.4.2\src\lcorolib.c" />
+    <ClCompile Include="lua-5.4.2\src\lctype.c" />
+    <ClCompile Include="lua-5.4.2\src\ldblib.c" />
+    <ClCompile Include="lua-5.4.2\src\ldebug.c" />
+    <ClCompile Include="lua-5.4.2\src\ldo.c" />
+    <ClCompile Include="lua-5.4.2\src\ldump.c" />
+    <ClCompile Include="lua-5.4.2\src\lfunc.c" />
+    <ClCompile Include="lua-5.4.2\src\lgc.c" />
+    <ClCompile Include="lua-5.4.2\src\linit.c" />
+    <ClCompile Include="lua-5.4.2\src\liolib.c" />
+    <ClCompile Include="lua-5.4.2\src\llex.c" />
+    <ClCompile Include="lua-5.4.2\src\lmathlib.c" />
+    <ClCompile Include="lua-5.4.2\src\lmem.c" />
+    <ClCompile Include="lua-5.4.2\src\loadlib.c" />
+    <ClCompile Include="lua-5.4.2\src\lobject.c" />
+    <ClCompile Include="lua-5.4.2\src\lopcodes.c" />
+    <ClCompile Include="lua-5.4.2\src\loslib.c" />
+    <ClCompile Include="lua-5.4.2\src\lparser.c" />
+    <ClCompile Include="lua-5.4.2\src\lstate.c" />
+    <ClCompile Include="lua-5.4.2\src\lstring.c" />
+    <ClCompile Include="lua-5.4.2\src\lstrlib.c" />
+    <ClCompile Include="lua-5.4.2\src\ltable.c" />
+    <ClCompile Include="lua-5.4.2\src\ltablib.c" />
+    <ClCompile Include="lua-5.4.2\src\ltm.c" />
+    <ClCompile Include="lua-5.4.2\src\lua.c" />
+    <ClCompile Include="lua-5.4.2\src\lundump.c" />
+    <ClCompile Include="lua-5.4.2\src\lutf8lib.c" />
+    <ClCompile Include="lua-5.4.2\src\lvm.c" />
+    <ClCompile Include="lua-5.4.2\src\lzio.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +164,34 @@
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\rpc\rpc_impl.hpp" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\utils\sequential_enum.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="lua-5.4.2\src\lapi.h" />
+    <ClInclude Include="lua-5.4.2\src\lauxlib.h" />
+    <ClInclude Include="lua-5.4.2\src\lcode.h" />
+    <ClInclude Include="lua-5.4.2\src\lctype.h" />
+    <ClInclude Include="lua-5.4.2\src\ldebug.h" />
+    <ClInclude Include="lua-5.4.2\src\ldo.h" />
+    <ClInclude Include="lua-5.4.2\src\lfunc.h" />
+    <ClInclude Include="lua-5.4.2\src\lgc.h" />
+    <ClInclude Include="lua-5.4.2\src\ljumptab.h" />
+    <ClInclude Include="lua-5.4.2\src\llex.h" />
+    <ClInclude Include="lua-5.4.2\src\llimits.h" />
+    <ClInclude Include="lua-5.4.2\src\lmem.h" />
+    <ClInclude Include="lua-5.4.2\src\lobject.h" />
+    <ClInclude Include="lua-5.4.2\src\lopcodes.h" />
+    <ClInclude Include="lua-5.4.2\src\lopnames.h" />
+    <ClInclude Include="lua-5.4.2\src\lparser.h" />
+    <ClInclude Include="lua-5.4.2\src\lprefix.h" />
+    <ClInclude Include="lua-5.4.2\src\lstate.h" />
+    <ClInclude Include="lua-5.4.2\src\lstring.h" />
+    <ClInclude Include="lua-5.4.2\src\ltable.h" />
+    <ClInclude Include="lua-5.4.2\src\ltm.h" />
+    <ClInclude Include="lua-5.4.2\src\lua.h" />
+    <ClInclude Include="lua-5.4.2\src\lua.hpp" />
+    <ClInclude Include="lua-5.4.2\src\luaconf.h" />
+    <ClInclude Include="lua-5.4.2\src\lualib.h" />
+    <ClInclude Include="lua-5.4.2\src\lundump.h" />
+    <ClInclude Include="lua-5.4.2\src\lvm.h" />
+    <ClInclude Include="lua-5.4.2\src\lzio.h" />
     <ClInclude Include="usb_hid_keys.h" />
     <ClInclude Include="user_config.h" />
   </ItemGroup>
