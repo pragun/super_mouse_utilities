@@ -29,7 +29,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -38,20 +38,22 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)Debug</OutDir>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>F:\super_mouse_cape\sol2\include;.;hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils;F:\super_mouse_cape\super_mouse_utilities\lua-5.4.2\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>F:\super_mouse_cape\sol2\include;.;hidapi\hidapi;$(SCITERSDKPATH)\include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils;F:\super_mouse_cape\super_mouse_utilities\lua-5.4.2\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SCITERSDK)\bin.win\x32\</OutDir>
+    <OutDir>$(ProjectDir)Debug</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -69,7 +71,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>$(SCITERSDK)\bin.win\packfolder.exe $(ProjectDir)ui $(ProjectDir)resources.cpp -v "resources"</Command>
+      <Command>$(SCITERSDKPATH)\bin.win\packfolder.exe $(ProjectDir)ui $(ProjectDir)resources.cpp -v "resources"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Pack resources</Message>
@@ -78,7 +80,7 @@
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
     </Manifest>
     <PostBuildEvent>
-      <Command>xcopy /y $(SCITERSDK)\bin.win\x32\sciter.dll $(OutDir)sciter.dll*</Command>
+      <Command>xcopy /y $(SCITERSDKPATH)\bin.win\x32\sciter.dll $(OutDir)sciter.dll*</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,6 +93,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;$(SCITERSDK)/include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,7 +112,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="$(SCITERSDK)\include\sciter-win-main.cpp" />
+    <ClCompile Include="..\sciter-sdk\include\sciter-win-main.cpp" />
     <ClCompile Include="lua-5.4.2\src\lapi.c" />
     <ClCompile Include="lua-5.4.2\src\lauxlib.c" />
     <ClCompile Include="lua-5.4.2\src\lbaselib.c" />
@@ -147,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="pack-resources.bat" />
+    <None Include="PropertySheet.props" />
     <None Include="ui\main.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>
