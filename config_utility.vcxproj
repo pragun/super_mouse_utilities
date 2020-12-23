@@ -47,7 +47,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)Debug</OutDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>F:\super_mouse_cape\sol2\include;.;F:\super_mouse_cape\hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils;F:\super_mouse_cape\super_mouse_utilities\lua-5.4.2\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>F:\super_mouse_cape\sol2\include;.;hidapi\hidapi;$(SCITERSDK)/include;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\Core\Inc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\rpc;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\mouse;F:\super_mouse_cape\super_mouse_stm32f4_usb_device\utils;F:\super_mouse_cape\super_mouse_utilities\lua-5.4.2\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -153,13 +153,6 @@
     <None Include="ui\style.css" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hidapi\windows\hidapi.vcxproj">
-      <Project>{a107c21c-418a-4697-bb10-20c3aa60e2e4}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\mouse\reporting_functions.h" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\rpc\rpc_impl.hpp" />
     <ClInclude Include="..\super_mouse_stm32f4_usb_device\utils\sequential_enum.h" />
@@ -194,6 +187,11 @@
     <ClInclude Include="lua-5.4.2\src\lzio.h" />
     <ClInclude Include="usb_hid_keys.h" />
     <ClInclude Include="user_config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="hidapi\windows\hidapi.vcxproj">
+      <Project>{a107c21c-418a-4697-bb10-20c3aa60e2e4}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
